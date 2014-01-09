@@ -140,6 +140,11 @@ class model_media extends model {
                 $sql .= "WHERE m.id IN (SELECT id FROM stb_media_vod)"; break;
         }
         $result = $this->db->query($sql); //var_dump($this->db);
+        for($i=0; $i<count($result); $i++) {
+            if(file_exists('../coms2/files/logo/'.md5($result[$i]->id).'.png')) {
+                $result[$i]->logo = 'coms2/files/logo/'.md5($result[$i]->id).'.png';
+            }
+        }
         return $result;
     }
 
